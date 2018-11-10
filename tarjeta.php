@@ -13,7 +13,7 @@ use PayPal\Api\Item;
 use PayPal\Api\ItemList;
 use PayPal\Api\Details;
 
-//Declaramos las variables a utilizar 
+//Declaramos las variables a utilizar despues se cambiara por datos reales
 $producto = 'cafe';
 $precio = 50;
 $pecio = (int) $precio;

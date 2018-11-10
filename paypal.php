@@ -12,7 +12,7 @@ use PayPal\Api\Transaction;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\Payment;
 
-//Declaramos las variables a utilizar 
+//Declaramos las variables a utilizar despues se cambiara por datos reales
 $producto = 'cafe';
 $precio = 50;
 $pecio = (int) $precio;
