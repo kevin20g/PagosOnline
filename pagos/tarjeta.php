@@ -1,6 +1,6 @@
 <?php
 //LLamamos a Config.php
-require 'config.php';
+require '../config.php';
 
 use PayPal\Api\Address;
 use PayPal\Api\Amount;

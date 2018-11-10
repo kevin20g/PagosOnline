@@ -1,6 +1,7 @@
 <?php
 //LLamamos a Config.php
-require 'config.php';
+include("../config.php");  
+
 
 //Importamos las clases a utilizar
 use PayPal\Api\Payer;
