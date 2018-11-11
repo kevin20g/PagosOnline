@@ -113,8 +113,15 @@ try {
 $transactions = $payment->getTransactions();
 $relatedResources = $transactions[0]->getRelatedResources();
 $authorization = $relatedResources[0]->getAuthorization();
+ 
+
+
+$approvalUrl = $payment->getApprovalLink();
+echo $approvalUrl;
+header("Location: {$approvalUrl}");
+
 
 // var_dump($transaction);
 // var_dump($relatedResources);
 //print_r($authorization);
-print_r($payment->getId());
+//print_r($payment->getId());

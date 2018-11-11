@@ -1,5 +1,6 @@
 <?php
 
+require '../config.php';
 // # Create Third Party Payment using PayPal as payment method
 // This sample code demonstrates how you can process a
 // PayPal Account based Payment with a third party paypal account.
@@ -64,7 +65,7 @@ $amount->setCurrency("USD")
 // Specify a payee with that user's email or merchant id
 // Merchant Id can be found at https://www.paypal.com/businessprofile/settings/
 $payee = new Payee();
-$payee->setEmail("stevendcoffey-facilitator@gmail.com");
+$payee->setEmail("kgarzaortiz@gmail.com");
 
 // ### Transaction
 // A transaction defines the contract of a
@@ -80,10 +81,9 @@ $transaction->setAmount($amount)
 // ### Redirect urls
 // Set the urls that the buyer must be redirected to after
 // payment approval/ cancellation.
-$baseUrl = getBaseUrl();
 $redirectUrls = new RedirectUrls();
-$redirectUrls->setReturnUrl("$baseUrl/ExecutePayment.php?success=true")
-    ->setCancelUrl("$baseUrl/ExecutePayment.php?success=false");
+$redirectUrls->setReturnUrl(URL_SITIO . "/pago_finalizado.php?exito=true")
+			  ->setCancelUrl(URL_SITIO . "/pago_finalizado.php?exito=false");
 
 // ### Payment
 // A Payment Resource; create one using
@@ -107,10 +107,8 @@ $request = clone $payment;
 // for payment approval
 try {
     $payment->create($apiContext);
-} catch (Exception $ex) {
-    // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-    ResultPrinter::printError("Created Payment Using PayPal. Please visit the URL to Approve.", "Payment", null, $request, $ex);
-    exit(1);
+} catch (PayPal\Exception\PaypalConnectionException $pce) {
+    print_r(json_decode($pce->getData()));
 }
 
 // ### Get redirect url
@@ -120,6 +118,6 @@ try {
 $approvalUrl = $payment->getApprovalLink();
 
 // NOTE: PLEASE DO NOT USE RESULTPRINTER CLASS IN YOUR ORIGINAL CODE. FOR SAMPLE ONLY
-ResultPrinter::printResult("Created Payment Using PayPal. Please visit the URL to Approve.", "Payment", "<a href='$approvalUrl' >$approvalUrl</a>", $request, $payment);
-
-return $payment;
+//ResultPrinter::printResult("Created Payment Using PayPal. Please visit the URL to Approve.", "Payment", "<a href='$approvalUrl' >$approvalUrl</a>", $request, $payment);
+header("Location: {$approvalUrl}");
+//return $payment;
